@@ -1,0 +1,24 @@
+body {
+  margin: 30px;
+  font-family: sans-serif;
+}
+input {
+  font-size: 40px;
+  width: 100%;
+}
+.content {
+  font-size: 40px;
+}
+h1 {
+  margin-bottom: -20px;
+}
+h2 {
+  color: rgba(0,0,0,0.5);
+}
+h3 {
+  margin-top: -20px;
+  color: rgba(0,0,0,0.5);
+}
+a {
+  color: rgba(0,0,255,0.45);
+}
