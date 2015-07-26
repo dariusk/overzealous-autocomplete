@@ -45,17 +45,18 @@ $(function() {
    source:[
     function( q,add ){
       $.ajax({
-          url: 'http://suggestqueries.google.com/complete/search',
-          jsonp: 'callback',
+          url: "http://api.bing.net/qson.aspx",
           dataType: 'jsonp',
+          jsonp: "JsonCallback",
           data: {
-            q: q+pair(q),
+            JsonType: "callback",
+            Query: q+pair(q),
             client: 'chrome'
           },
           success: function( response ) {
             console.log( response ); // server response
-            response[1].length = 4;
-            add(response[1]);
+            response.SearchSuggestion.Section.length = 4;
+            add(response.SearchSuggestion.Section.map(function(d){return d.Text;}));
           }
       });
     }
