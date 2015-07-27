@@ -1,21 +1,6 @@
-/* global sharing */
 Array.prototype.pick = function() {
   return this[Math.floor(Math.random()*this.length)];
 };
-
-var states = [
-  'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-  'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 
-  'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 
-  'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 
-  'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 
-  'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-  'New Jersey', 'New Mexico', 'New York', 'North Carolina', 
-  'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 
-  'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 
-  'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 
-  'West Virginia', 'Wisconsin', 'Wyoming'
-];
 
 var letters='bcdfghjklmnpqrstvwxyz'.split('');
 var vowels='aeiou'.split('');
@@ -45,11 +30,11 @@ $(function() {
    source:[
     function( q,add ){
       $.ajax({
-          url: "http://api.bing.net/qson.aspx",
+          url: 'http://api.bing.net/qson.aspx',
           dataType: 'jsonp',
-          jsonp: "JsonCallback",
+          jsonp: 'JsonCallback',
           data: {
-            JsonType: "callback",
+            JsonType: 'callback',
             Query: q+pair(q),
             client: 'chrome'
           },
@@ -63,20 +48,3 @@ $(function() {
    ]
   });
 });
-
-function generate(nounPlural, verb) {
-  nounPlural = nounPlural || nouns.pick().pluralize();
-  verb = verb || verbs.pick();
-  var generatedText = '<em>' + verb + '</em> ALL the <em>' + nounPlural + '</em>';
-  var sharedText = verb + ' ALL the ' + nounPlural;
-  $('#content').html(generatedText);
-  var shareUrl = window.location.href.split('?')[0]+'?word='+sharing.encodeStr(verb)+'$'+sharing.encodeStr(nounPlural);
-  $('#share').attr('href', shareUrl);
-  $('.twitter-share-button').remove();
-  $('#twitterShare').html('<a href="https://twitter.com/share" class="twitter-share-button" data-url="' + shareUrl + '" data-text="' + sharedText + '" data-lang="en">Tweet</a>');
-  if (twttr.widgets) {
-    twttr.widgets.load();
-  }
-}
-
-$('#generate').click(function() { generate(); });
